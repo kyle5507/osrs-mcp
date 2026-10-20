@@ -13,6 +13,10 @@ repositories {
 	mavenCentral()
 }
 
+configurations.all {
+	resolutionStrategy.cacheDynamicVersionsFor 30, 'minutes'
+}
+
 def runeLiteVersion = 'latest.release'
 def pluginMainClass = 'com.osrsmcp.OsrsMcpPluginTest'
 
@@ -65,5 +69,5 @@ tasks.register('shadowJar', Jar) {
 
 	group = BasePlugin.BUILD_GROUP
 	archiveClassifier.set('shadow')
-	archiveFileName.set("${rootProject.name}-${project.version}-all.jar")
+	archiveFileName.set('osrs-mcp-runelite.jar')
 }

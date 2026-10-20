@@ -59,9 +59,35 @@ Placing a staged offer: pick the item (it is listed first in the search), then c
 
 The assistant can filter your bank or lay it out for you through RuneLite's built-in Bank Tags plugin (the same mechanism the Inventory Setups plugin uses). Open your bank in-game for the result to show; if it is closed the request is held and applied the moment you open it. Filters and layouts are temporary: they use virtual tags, clearing happens with `clear_bank_filter`, on logout, or when the plugin stops, and closing the bank also drops them. A layout is 8 slots wide per row, and items you do not own appear as placeholders. Item names should match the in-game names; a name without a dose or charge count (for example "Prayer potion") matches every variant you own.
 
-## Setup
+## Install (not on the Plugin Hub)
 
-1. Install the OSRS MCP plugin in RuneLite and log in.
+OSRS MCP is distributed as a small self-built RuneLite client with the plugin built in. It uses the same `~/.runelite` profile and settings as normal RuneLite, so your settings and Plugin Hub plugins carry over. You can still use the official RuneLite side by side; only the OSRS MCP build runs the MCP server, so do not run two copies of the OSRS MCP build at once (port 8765).
+
+**Requirements:** [Java 11 or newer](https://adoptium.net/temurin/releases/) and an internet connection.
+
+1. Click **Code > Download ZIP** on GitHub (or `git clone` this repo) and unzip it somewhere permanent.
+2. Log in once with your Jagex account: run `launch\setup-jagex-login.bat` (Windows) or `launch/setup-jagex-login.sh` (macOS/Linux). It follows RuneLite's [Using Jagex Accounts](https://github.com/runelite/runelite/wiki/Using-Jagex-Accounts) guide: open the Jagex auth button in the sidebar, choose "Add Jagex Account", sign in, select your character and press "Play Now".
+3. Windows: create a desktop shortcut with the OSRS icon:
+   ```
+   powershell -ExecutionPolicy Bypass -File launch\create-desktop-shortcut.ps1
+   ```
+4. Double-click the shortcut (or `launch\OSRS-MCP-RuneLite.bat`; on macOS `launch/OSRS-MCP-RuneLite.command`; on Linux `launch/osrs-mcp-runelite.sh`). You may need `chmod +x launch/*.sh launch/*.command` first.
+
+If your characters are not listed on a normal start, launch with `launch\OSRS-MCP-RuneLite.bat --developer-mode` (extra arguments are passed to the client).
+
+**Updates:** each launch rebuilds the client, which fetches the newest RuneLite release (so game updates are picked up automatically). Plugin updates arrive through `git pull` (done automatically when you cloned the repo) or by downloading a new ZIP. The first launch takes a minute or two while dependencies download.
+
+## Why not the Plugin Hub
+
+The plugin was submitted to the RuneLite Plugin Hub and declined under the rule against plugins that expose player information over HTTP (see [plugin-hub#11453](https://github.com/runelite/plugin-hub/pull/11453), a similar plugin, and [plugin-hub#19062](https://github.com/runelite/plugin-hub/pull/19062)). The official launcher cannot load plugins outside the Hub, so this repo provides the launcher scripts above instead. The server listens on localhost only and requires a token.
+
+## Disclaimer
+
+This is an unofficial build. It is not affiliated with, endorsed by or supported by RuneLite or Jagex; use it at your own risk and do not ask them for support. Only download it from this repository. The plugin never automates input: overlays are visual only and GE assist only fills a box when you click or press a key.
+
+## Connect an AI client
+
+1. Start the OSRS MCP build and log in.
 2. Open the **OSRS MCP** side panel and copy the command or config it shows. It includes your auth token.
 
 **Claude Code**
@@ -107,7 +133,8 @@ Found under the plugin's settings in RuneLite.
 ## Development
 
 ```
-./gradlew run     # launch a dev RuneLite client with the plugin loaded
+./gradlew run         # launch a dev RuneLite client (developer mode) with the plugin loaded
+./gradlew shadowJar   # build build/libs/osrs-mcp-runelite.jar (what the launch scripts run)
 ./gradlew test    # run unit tests
 ```
 
