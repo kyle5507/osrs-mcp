@@ -4,6 +4,7 @@ cd /d "%~dp0.."
 
 rem Launches RuneLite with the OSRS MCP plugin built in.
 rem Extra arguments are passed to the RuneLite client.
+rem Developer mode (with -ea) is required for RuneLite's Jagex account login in self-built clients.
 rem Set OSRS_MCP_DRY_RUN=1 to print the final command instead of starting the client.
 
 set "JAR=build\libs\osrs-mcp-runelite.jar"
@@ -60,9 +61,9 @@ where javaw >nul 2>nul
 if errorlevel 1 set "JRUN=java"
 
 if "%OSRS_MCP_DRY_RUN%"=="1" (
-  echo DRY RUN: start "" %JRUN% -jar %JAR% %*
+  echo DRY RUN: start "" %JRUN% -ea -jar %JAR% --developer-mode %*
   exit /b 0
 )
 
-start "" %JRUN% -jar "%JAR%" %*
+start "" %JRUN% -ea -jar "%JAR%" --developer-mode %*
 exit /b 0

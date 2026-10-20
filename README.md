@@ -66,14 +66,14 @@ OSRS MCP is distributed as a small self-built RuneLite client with the plugin bu
 **Requirements:** [Java 11 or newer](https://adoptium.net/temurin/releases/) and an internet connection.
 
 1. Click **Code > Download ZIP** on GitHub (or `git clone` this repo) and unzip it somewhere permanent.
-2. Log in once with your Jagex account: run `launch\setup-jagex-login.bat` (Windows) or `launch/setup-jagex-login.sh` (macOS/Linux). It follows RuneLite's [Using Jagex Accounts](https://github.com/runelite/runelite/wiki/Using-Jagex-Accounts) guide: open the Jagex auth button in the sidebar, choose "Add Jagex Account", sign in, select your character and press "Play Now".
-3. Windows: create a desktop shortcut with the OSRS icon:
+2. Windows: create a desktop shortcut with the OSRS icon:
    ```
    powershell -ExecutionPolicy Bypass -File launch\create-desktop-shortcut.ps1
    ```
-4. Double-click the shortcut (or `launch\OSRS-MCP-RuneLite.bat`; on macOS `launch/OSRS-MCP-RuneLite.command`; on Linux `launch/osrs-mcp-runelite.sh`). You may need `chmod +x launch/*.sh launch/*.command` first.
+3. Double-click the shortcut (or `launch\OSRS-MCP-RuneLite.bat`; on macOS `launch/OSRS-MCP-RuneLite.command`; on Linux `launch/osrs-mcp-runelite.sh`). You may need `chmod +x launch/*.sh launch/*.command` first.
+4. First time only, log in with your Jagex account using RuneLite's [Using Jagex Accounts](https://github.com/runelite/runelite/wiki/Using-Jagex-Accounts) flow: click the **Jagex Accounts** button in the sidebar, choose **Add Jagex Account**, sign in, pick your character and press **Play Now**. The account is remembered for later launches.
 
-If your characters are not listed on a normal start, launch with `launch\OSRS-MCP-RuneLite.bat --developer-mode` (extra arguments are passed to the client).
+The client starts in RuneLite's developer mode because that is the only mode in which self-built clients can use Jagex account login; you will see an extra Developer Tools button in the sidebar, which you can ignore.
 
 **Updates:** each launch rebuilds the client, which fetches the newest RuneLite release (so game updates are picked up automatically). Plugin updates arrive through `git pull` (done automatically when you cloned the repo) or by downloading a new ZIP. The first launch takes a minute or two while dependencies download.
 

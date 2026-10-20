@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Launches RuneLite with the OSRS MCP plugin built in (macOS / Linux).
 # Extra arguments are passed to the RuneLite client.
+# Developer mode (with -ea) is required for RuneLite's Jagex account login in self-built clients.
 # Set OSRS_MCP_DRY_RUN=1 to print the final command instead of starting the client.
 cd "$(dirname "$0")/.." || exit 1
 
@@ -42,8 +43,8 @@ if [ ! -f "$JAR" ]; then
 fi
 
 if [ "$OSRS_MCP_DRY_RUN" = "1" ]; then
-  echo "DRY RUN: nohup java -jar $JAR $*"
+  echo "DRY RUN: nohup java -ea -jar $JAR --developer-mode $*"
   exit 0
 fi
 
-nohup java -jar "$JAR" "$@" >/dev/null 2>&1 &
+nohup java -ea -jar "$JAR" --developer-mode "$@" >/dev/null 2>&1 &
