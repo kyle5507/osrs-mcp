@@ -63,10 +63,10 @@ The assistant can filter your bank or lay it out for you through RuneLite's buil
 
 OSRS MCP is distributed as a small self-built RuneLite client with the plugin built in. It uses the same `~/.runelite` profile and settings as normal RuneLite, so your settings and Plugin Hub plugins carry over. You can still use the official RuneLite side by side; only the OSRS MCP build runs the MCP server, so do not run two copies of the OSRS MCP build at once (port 8765).
 
-**Requirements:** [Java 11 or newer](https://adoptium.net/temurin/releases/) and an internet connection.
+**Requirements:** [Java 11 or newer](https://adoptium.net/temurin/releases/) (Temurin 21 recommended; on Windows pick the .msi and enable "Set JAVA_HOME"), an internet connection, and for Claude Desktop also [Node.js LTS](https://nodejs.org).
 
 1. Click **Code > Download ZIP** on GitHub (or `git clone` this repo) and unzip it somewhere permanent.
-2. Windows: create a desktop shortcut with the OSRS icon:
+2. Windows: create a desktop shortcut with the OSRS icon. Open the unzipped folder, type `powershell` in File Explorer's address bar and press Enter, then run:
    ```
    powershell -ExecutionPolicy Bypass -File launch\create-desktop-shortcut.ps1
    ```
@@ -98,13 +98,15 @@ claude mcp add --transport http osrs http://127.0.0.1:8765/mcp --header "Authori
 
 **Claude Desktop**
 
-Add this to `claude_desktop_config.json` (requires [Node.js](https://nodejs.org) for `npx`):
+Requires [Node.js](https://nodejs.org) (for `npx`). In the OSRS MCP panel click **Copy Claude Desktop config**, then in Claude Desktop open **Settings > Developer > Edit Config** and add the `"osrs"` entry inside `"mcpServers"` (if the file is empty, paste the whole thing). It looks like:
 
 ```json
 {"mcpServers":{"osrs":{"command":"npx","args":["-y","mcp-remote","http://127.0.0.1:8765/mcp","--header","Authorization:${AUTH_HEADER}"],"env":{"AUTH_HEADER":"Bearer <token>"}}}}
 ```
 
-Restart Claude Desktop after editing the config.
+Save, then fully quit Claude Desktop (right-click its icon in the system tray > Quit) and reopen it. Keep RuneLite running while you chat; the plugin is the server.
+
+**Try it:** "Check my stats and gear. What should I train next?" or "Open my bank and make me a Vorkath bank layout."
 
 ## Settings
 
