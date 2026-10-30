@@ -11,7 +11,7 @@ set "JAR=build\libs\osrs-mcp-runelite.jar"
 
 where java >nul 2>nul
 if errorlevel 1 (
-  echo Java was not found. Install Java 11 or newer from:
+  echo Java was not found. Install Java 17 or newer from:
   echo   https://adoptium.net/temurin/releases/
   pause
   exit /b 1
@@ -25,8 +25,8 @@ for /f "tokens=1,2 delims=." %%a in ("%JMAJOR%") do (
 )
 for /f "tokens=1 delims=-+_" %%a in ("%JMAJOR%") do set "JMAJOR=%%a"
 set /a JNUM=%JMAJOR% 2>nul
-if %JNUM% LSS 11 (
-  echo Java 11 or newer is required ^(found "%JMAJOR%"^). Install it from:
+if %JNUM% LSS 17 (
+  echo Java 17 or newer is required ^(found "%JMAJOR%"^). Install it from:
   echo   https://adoptium.net/temurin/releases/
   pause
   exit /b 1
@@ -44,7 +44,7 @@ echo Building ^(this also picks up the latest RuneLite^)...
 call "%~dp0..\gradlew.bat" -q shadowJar
 if errorlevel 1 (
   echo.
-  echo Build failed. Check your internet connection and that Java 11+ is installed,
+  echo Build failed. Check your internet connection and that Java 17+ is installed,
   echo then try again. If it keeps failing, re-download the project from GitHub.
   pause
   exit /b 1

@@ -8,7 +8,7 @@ cd "$(dirname "$0")/.." || exit 1
 JAR="build/libs/osrs-mcp-runelite.jar"
 
 if ! command -v java >/dev/null 2>&1; then
-  echo "Java was not found. Install Java 11 or newer from https://adoptium.net/temurin/releases/"
+  echo "Java was not found. Install Java 17 or newer from https://adoptium.net/temurin/releases/"
   exit 1
 fi
 
@@ -16,8 +16,8 @@ ver=$(java -version 2>&1 | head -n1 | sed -E 's/.*version "([^"]+)".*/\1/')
 major=${ver%%.*}
 if [ "$major" = "1" ]; then major=$(echo "$ver" | cut -d. -f2); fi
 major=${major%%[!0-9]*}
-if [ -z "$major" ] || [ "$major" -lt 11 ]; then
-  echo "Java 11 or newer is required (found \"$ver\"). Install from https://adoptium.net/temurin/releases/"
+if [ -z "$major" ] || [ "$major" -lt 17 ]; then
+  echo "Java 17 or newer is required (found \"$ver\"). Install from https://adoptium.net/temurin/releases/"
   exit 1
 fi
 
@@ -32,7 +32,7 @@ fi
 echo "Building (this also picks up the latest RuneLite)..."
 if ! ./gradlew -q shadowJar; then
   echo
-  echo "Build failed. Check your internet connection and that Java 11+ is installed,"
+  echo "Build failed. Check your internet connection and that Java 17+ is installed,"
   echo "then try again. If it keeps failing, re-download the project from GitHub."
   exit 1
 fi

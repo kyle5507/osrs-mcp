@@ -63,7 +63,7 @@ The assistant can filter your bank or lay it out for you through RuneLite's buil
 
 OSRS MCP is distributed as a small self-built RuneLite client with the plugin built in. It uses the same `~/.runelite` profile and settings as normal RuneLite, so your settings and Plugin Hub plugins carry over. You can still use the official RuneLite side by side; only the OSRS MCP build runs the MCP server, so do not run two copies of the OSRS MCP build at once (port 8765).
 
-**Requirements:** [Java 11 or newer](https://adoptium.net/temurin/releases/) (Temurin 21 recommended; on Windows pick the .msi and enable "Set JAVA_HOME"), an internet connection, and for Claude Desktop also [Node.js LTS](https://nodejs.org).
+**Requirements:** [Java 17 or newer](https://adoptium.net/temurin/releases/) (Temurin 21 or 25 recommended; on Windows pick the .msi and enable "Set JAVA_HOME"), an internet connection, and for Claude Desktop also [Node.js LTS](https://nodejs.org).
 
 1. Click **Code > Download ZIP** on GitHub (or `git clone` this repo) and unzip it somewhere permanent.
 2. Windows: create a desktop shortcut with the OSRS icon. Open the unzipped folder, type `powershell` in File Explorer's address bar and press Enter, then run:
